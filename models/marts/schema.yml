@@ -1,0 +1,24 @@
+version: 2
+
+models:
+  - name: fct_my_first_model
+    description: "Fact table built from int_my_first_model (portfolio demo)"
+    columns:
+      - name: id
+        description: "Business identifier propagated from intermediate"
+        data_tests:
+          - not_null
+          - unique
+
+  - name: dim_customers
+    description: "Customer dimension built from int_customers (active customers only)"
+    columns:
+      - name: customer_id
+        description: "Unique customer identifier"
+        data_tests:
+          - not_null
+          - unique
+      - name: country
+        description: "ISO-like country code"
+        data_tests:
+          - not_null

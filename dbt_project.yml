@@ -1,0 +1,28 @@
+name: 'de_snowflake_dbt'
+version: '1.0.0'
+profile: 'de_snowflake_dbt'
+
+model-paths: ["models"]
+analysis-paths: ["analyses"]
+test-paths: ["tests"]
+seed-paths: ["seeds"]
+macro-paths: ["macros"]
+snapshot-paths: ["snapshots"]
+
+clean-targets:
+  - "target"
+  - "dbt_packages"
+
+models:
+  de_snowflake_dbt:
+    example:
+      +materialized: view
+
+    staging:
+      +tags: ["staging"]
+
+    intermediate:
+      +tags: ["intermediate"]
+
+    marts:
+      +tags: ["marts"]

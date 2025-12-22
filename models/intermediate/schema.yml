@@ -1,0 +1,10 @@
+version: 2
+
+models:
+  - name: int_my_first_model
+    description: "Intermediate model built from stg_my_first_model"
+    columns:
+      - name: id
+        description: "Business identifier propagated from staging"
+        data_tests:
+          - not_null

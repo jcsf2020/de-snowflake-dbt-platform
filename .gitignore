@@ -1,0 +1,17 @@
+# dbt build artifacts
+target/
+dbt_packages/
+logs/
+
+# env / secrets (direnv)
+.env
+.env.*
+.envrc
+.direnv/
+
+# OS
+.DS_Store
+
+# python
+__pycache__/
+*.pyc

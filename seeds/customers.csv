@@ -1,0 +1,11 @@
+customer_id,name,country,status
+1,Ana Silva,PT,active
+2,João Costa,PT,active
+3,Marie Dubois,FR,active
+4,Carlos Ruiz,ES,inactive
+5,Laura Rossi,IT,active
+6,John Smith,UK,active
+7,Sofia Müller,DE,active
+8,Pedro Santos,PT,inactive
+9,Emma Brown,UK,active
+10,Luca Bianchi,IT,active
