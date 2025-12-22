@@ -34,6 +34,7 @@ models/
   staging/        Source cleaning and standardization  
   intermediate/   Business logic transformations  
   marts/          Analytics-ready tables (dimensions and facts)  
+
 seeds/            Versioned CSV seed data  
 tests/            Data quality tests  
 snapshots/        Snapshot structure  
