@@ -1,0 +1,61 @@
+version: 2
+
+seeds:
+  - name: customers
+    description: "Reference dataset (seed) with customer master data used for demos and analytics modeling."
+    columns:
+      - name: customer_id
+        description: "Customer primary key."
+        tests:
+          - not_null
+          - unique
+
+      - name: name
+        description: "Customer full name."
+        tests:
+          - not_null
+
+      - name: country
+        description: "ISO-like country code (demo domain)."
+        tests:
+          - not_null
+          - accepted_values:
+              values: ["PT", "FR", "ES", "IT", "UK", "DE"]
+
+      - name: status
+        description: "Customer lifecycle status."
+        tests:
+          - not_null
+          - accepted_values:
+              values: ["active", "inactive"]
+
+  - name: orders
+    description: "Order events used as fact source. One row per order."
+    columns:
+      - name: order_id
+        description: "Order primary key."
+        tests:
+          - not_null
+          - unique
+
+      - name: customer_id
+        description: "Foreign key to dim_customers."
+        tests:
+          - not_null
+
+      - name: order_date
+        description: "Date when the order occurred."
+        tests:
+          - not_null
+
+      - name: amount_eur
+        description: "Order monetary value in EUR."
+        tests:
+          - not_null
+
+      - name: status
+        description: "Order lifecycle status."
+        tests:
+          - not_null
+          - accepted_values:
+              values: ["paid", "refunded", "cancelled"]

@@ -18,7 +18,43 @@ models:
         data_tests:
           - not_null
           - unique
-      - name: country
+      - name: country_code
         description: "ISO-like country code"
         data_tests:
           - not_null
+
+  - name: fct_orders
+    description: "Fact table for orders (1 row per order). Used for revenue, volume and status analytics."
+    columns:
+      - name: order_id
+        description: "Order primary key."
+        data_tests:
+          - not_null
+          - unique
+
+      - name: customer_id
+        description: "FK to dim_customers."
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('dim_customers')
+                field: customer_id
+
+      - name: order_date
+        description: "Order date."
+        data_tests:
+          - not_null
+
+      - name: amount
+        description: "Order amount."
+        data_tests:
+          - not_null
+
+      - name: status
+        description: "Order lifecycle status."
+        data_tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: ["paid", "cancelled", "refunded"]

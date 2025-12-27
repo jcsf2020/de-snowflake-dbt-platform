@@ -34,3 +34,35 @@ models:
           - accepted_values:
               arguments:
                 values: ["active", "inactive"]
+
+  - name: stg_orders
+    description: "Staging view built from the orders seed (typed + cleaned)."
+    columns:
+      - name: order_id
+        description: "Order primary key."
+        data_tests:
+          - not_null
+          - unique
+
+      - name: customer_id
+        description: "FK to customer (dim_customers)."
+        data_tests:
+          - not_null
+
+      - name: order_date
+        description: "Order date (YYYY-MM-DD)."
+        data_tests:
+          - not_null
+
+      - name: amount
+        description: "Order total amount."
+        data_tests:
+          - not_null
+
+      - name: status
+        description: "Order payment lifecycle status."
+        data_tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: ["paid", "cancelled", "refunded"]

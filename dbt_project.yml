@@ -15,9 +15,6 @@ clean-targets:
 
 models:
   de_snowflake_dbt:
-    example:
-      +materialized: view
-
     staging:
       +tags: ["staging"]
 
