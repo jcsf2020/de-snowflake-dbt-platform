@@ -1,4 +1,15 @@
-# dbt build artifacts
+# OS
+.DS_Store
+
+# python
+__pycache__/
+*.pyc
+
+# Python virtualenv
+.venv/
+.venv312/
+
+# dbt artifacts
 target/
 dbt_packages/
 logs/
@@ -9,20 +20,8 @@ logs/
 .envrc
 .direnv/
 
-# OS
-.DS_Store
-
-# python
-__pycache__/
-*.pyc
-
-# Python virtualenv
-.venv/
-
-# dbt artifacts
-target/
-dbt_packages/
-logs/
-
 # local dbt config (optional)
 .user.yml
+
+# Orchestration logs
+orchestration/logs/
