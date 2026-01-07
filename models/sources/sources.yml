@@ -1,0 +1,19 @@
+version: 2
+
+sources:
+  - name: demo_de
+    database: DEMO_DE
+    schema: STG
+    tables:
+      - name: orders
+        description: "Raw orders source table in Snowflake (DEMO_DE.STG.ORDERS)."
+
+        loaded_at_field: ORDER_DATE
+
+        freshness:
+          warn_after:
+            count: 24
+            period: hour
+          error_after:
+            count: 48
+            period: hour
