@@ -7,3 +7,5 @@ order_id,customer_id,order_date,amount_eur,status
 1006,8,2024-01-15,45.00,cancelled
 1007,10,2024-01-18,310.00,paid
 1008,1,2024-01-20,12.49,paid
+1009,2,2024-01-22,75.00,paid
+1010,2,2024-01-25,33.00,paid

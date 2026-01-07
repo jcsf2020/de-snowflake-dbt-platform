@@ -23,3 +23,9 @@ models:
 
     marts:
       +tags: ["marts"]
+
+seeds:
+  de_snowflake_dbt:
+    orders:
+      +column_types:
+        order_date: TIMESTAMP_NTZ

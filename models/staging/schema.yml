@@ -10,15 +10,6 @@ models:
           - unique
           - not_null
 
-  - name: my_second_dbt_model
-    description: "Model built on top of staging"
-    columns:
-      - name: id
-        description: "Primary key"
-        data_tests:
-          - unique
-          - not_null
-
   - name: stg_customers
     description: "Staging view built from the customers seed"
     columns:

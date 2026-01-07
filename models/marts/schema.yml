@@ -58,3 +58,134 @@ models:
           - accepted_values:
               arguments:
                 values: ["paid", "cancelled", "refunded"]
+
+  - name: dim_date
+    description: "Calendar date dimension generated via a date spine. Provides full daily coverage and common date attributes for time-based analytics."
+    columns:
+      - name: date_day
+        description: "Calendar date (grain: 1 row per day). Primary key of the date dimension."
+        data_tests:
+          - not_null
+          - unique
+      - name: year
+        description: "Calendar year (YYYY)."
+        data_tests:
+          - not_null
+      - name: month
+        description: "Calendar month number (1-12)."
+        data_tests:
+          - not_null
+      - name: month_name
+        description: "Calendar month name."
+      - name: day
+        description: "Day of month (1-31)."
+        data_tests:
+          - not_null
+      - name: day_of_week_iso
+        description: "ISO day of week (1=Mon ... 7=Sun)."
+        data_tests:
+          - not_null
+      - name: is_weekend
+        description: "True if Saturday/Sunday (ISO 6-7)."
+
+  - name: fct_orders_daily
+    description: "Daily aggregated orders fact table (grain: 1 row per order_date). Includes counts by status and paid revenue."
+    columns:
+      - name: order_date
+        description: "Date of the orders (grain column)."
+        data_tests:
+          - not_null
+          - unique
+          - relationships:
+              arguments:
+                to: ref('dim_date')
+                field: date_day
+      - name: total_orders
+        description: "Total number of orders on the date."
+        data_tests:
+          - not_null
+      - name: paid_orders
+        description: "Number of orders with status='paid' on the date."
+        data_tests:
+          - not_null
+      - name: refunded_orders
+        description: "Number of orders with status='refunded' on the date."
+        data_tests:
+          - not_null
+      - name: cancelled_orders
+        description: "Number of orders with status='cancelled' on the date."
+        data_tests:
+          - not_null
+      - name: revenue_paid
+        description: "Sum of amount for paid orders only on the date."
+        data_tests:
+          - not_null
+
+  - name: fct_orders_daily_by_date
+    description: "Date-complete daily fact table built by joining dim_date to fct_orders_daily. Ensures zero-filled metrics for dates without orders."
+    columns:
+      - name: order_date
+        description: "Calendar date (complete range)."
+        data_tests:
+          - not_null
+          - unique
+          - relationships:
+              arguments:
+                to: ref('dim_date')
+                field: date_day
+      - name: total_orders
+        description: "Total orders on the date (0 if none)."
+        data_tests:
+          - not_null
+      - name: paid_orders
+        description: "Paid orders on the date (0 if none)."
+        data_tests:
+          - not_null
+      - name: refunded_orders
+        description: "Refunded orders on the date (0 if none)."
+        data_tests:
+          - not_null
+      - name: cancelled_orders
+        description: "Cancelled orders on the date (0 if none)."
+        data_tests:
+          - not_null
+      - name: revenue_paid
+        description: "Paid revenue on the date (0.00 if none)."
+        data_tests:
+          - not_null
+  - name: dim_customers_scd2
+    description: "SCD2 customer dimension built from customers_snapshot. One row per customer version; current row has dbt_valid_to = null."
+    columns:
+      - name: customer_id
+        description: "Business key of the customer."
+        data_tests:
+          - not_null
+
+      - name: name
+        description: "Customer name for the given version."
+        data_tests:
+          - not_null
+
+      - name: country
+        description: "Country code for the given version."
+        data_tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: ["PT", "FR", "ES", "IT", "UK", "DE"]
+
+      - name: status
+        description: "Status for the given version."
+        data_tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: ["active", "inactive"]
+
+      - name: dbt_valid_from
+        description: "Version start timestamp."
+        data_tests:
+          - not_null
+
+      - name: dbt_valid_to
+        description: "Version end timestamp. Null means current."

@@ -20,14 +20,16 @@ seeds:
         tests:
           - not_null
           - accepted_values:
-              values: ["PT", "FR", "ES", "IT", "UK", "DE"]
+                arguments:
+                  values: ["PT", "FR", "ES", "IT", "UK", "DE"]
 
       - name: status
         description: "Customer lifecycle status."
         tests:
           - not_null
           - accepted_values:
-              values: ["active", "inactive"]
+                arguments:
+                  values: ["active", "inactive"]
 
   - name: orders
     description: "Order events used as fact source. One row per order."
@@ -58,4 +60,5 @@ seeds:
         tests:
           - not_null
           - accepted_values:
-              values: ["paid", "refunded", "cancelled"]
+                arguments:
+                  values: ["paid", "refunded", "cancelled"]

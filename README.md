@@ -1,41 +1,61 @@
 # Snowflake + dbt Analytics Platform
 
-End-to-end Data Engineering project using **dbt** and **Snowflake**, focused on analytics engineering best practices: layered modeling, data quality tests and documentation.
+End-to-end Data Engineering project using **dbt** and **Snowflake**, focused on analytics engineering best practices: layered modeling, data quality and documentation.
 
 ---
 
 ## Project Overview
 
+This project demonstrates a modern analytics engineering workflow using dbt on top of Snowflake.
+It covers the full lifecycle from raw data ingestion to analytics-ready dimensional models.
+
+Key objectives:
+- Apply analytics engineering best practices
+- Build a clean dimensional model (facts & dimensions)
+- Enforce data quality through automated tests
+- Generate lineage-aware documentation with dbt Docs
+
+---
+
 ## Data Model
 
-This project implements a dimensional model optimized for analytics.
+The project implements a dimensional model optimized for analytics and BI use cases.
 
 ### Dimensions
-- **dim_date**  
-  Calendar dimension generated using a date spine, providing full date coverage and attributes such as year, month, day and weekday.
 
-- **dim_customers**  
-  Customer dimension enriched with country and active status.
+- **dim_date**
+  Calendar date dimension generated using a date spine, providing full daily coverage and common date attributes.
+
+- **dim_customers**
+  Customer dimension containing customer attributes such as country and active status.
 
 ### Facts
-- **fct_orders**  
-  Order-level fact table (1 row per order) including order amount, status and customer attributes.
 
-- **fct_orders_daily**  
-  Daily aggregated fact table with order counts and revenue metrics split by order status.
+- **fct_orders**
+  Order-level fact table (1 row per order) including order amount, status and customer relationship.
 
-- **fct_orders_daily_by_date**  
+- **fct_orders_daily**
+  Daily aggregated fact table with order counts and revenue metrics by status.
+
+- **fct_orders_daily_by_date**
   Date-complete daily fact table built by joining `fct_orders_daily` with `dim_date`, ensuring zero-filled metrics for dates without orders.
 
+---
 
-This project demonstrates a **modern analytics stack** with:
+## Analytics Engineering Practices
 
-- Staging → Intermediate → Marts data modeling
-- Dimensional model (dimensions + facts)
-- Data quality tests (not_null, unique, accepted_values)
-- Reproducible builds and documented lineage
+This project applies:
 
-Designed for **portfolio, technical interviews and real-world analytics scenarios**.
+- Staging → Intermediate → Marts modeling layers
+- Dimensional modeling (facts and dimensions)
+- Data quality tests:
+  - `not_null`
+  - `unique`
+  - `accepted_values`
+  - `relationships`
+- Incremental models and snapshots
+- Reproducible builds with `dbt build`
+- Documented lineage and metadata via dbt Docs
 
 ---
 
@@ -44,38 +64,20 @@ Designed for **portfolio, technical interviews and real-world analytics scenario
 - dbt Core (v1.10)
 - Snowflake
 - SQL
-- CSV seeds
-- dbt tests & selectors
-- dbt Docs (catalog + lineage)
+- CSV seed data
+- dbt tests and selectors
+- dbt Docs (catalog and lineage)
 
 ---
 
 ## Project Structure
 
+```text
 models/
-  staging/        Source cleaning and standardization  
-  intermediate/   Business logic transformations  
-  marts/          Analytics-ready tables (dimensions and facts)  
+  staging/        Source cleaning and standardization
+  intermediate/   Business logic transformations
+  marts/          Analytics-ready tables (facts and dimensions)
 
-seeds/            Versioned CSV seed data  
-tests/            Data quality tests  
-snapshots/        Snapshot structure  
-
----
-
-## How to Run
-
-dbt run  
-dbt test  
-dbt build  
-
-Generate docs:
-
-dbt docs generate  
-dbt docs serve --port 8080  
-
----
-
-## Author
-
-Joao Fonseca
+seeds/            Versioned CSV seed data
+snapshots/        Snapshot definitions
+tests/            Data quality tests

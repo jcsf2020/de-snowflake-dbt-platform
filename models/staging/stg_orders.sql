@@ -11,7 +11,7 @@ with src as (
     try_to_date(order_date)          as order_date,
     try_to_decimal(to_varchar(amount_eur), 10, 2)    as amount,
     lower(trim(status))              as status
-  from {{ ref('orders') }}
+  from {{ source('demo_de','orders') }}
 )
 
 select
