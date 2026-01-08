@@ -25,3 +25,8 @@ logs/
 
 # Orchestration logs
 orchestration/logs/
+# editor
+.vscode/
+
+# backups
+*.bak

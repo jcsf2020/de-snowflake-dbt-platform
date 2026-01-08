@@ -124,3 +124,31 @@ seeds/            Versioned CSV seed data
 snapshots/        Snapshot definitions
 macros/           Reusable SQL macros
 orchestration/    Prefect flow definitions
+
+
+
+
+## Observability & Run Metrics
+
+This project includes a lightweight observability layer on top of dbt runs.
+
+After each execution, dbt artifacts are parsed to extract operational metrics:
+
+- Source: `target/run_results.json` and `target/manifest.json`
+- Metrics extracted:
+  - Success / fail / warn counts
+  - Execution time per model and test
+  - Top slowest nodes
+  - Breakdown by resource type (models, tests, seeds, snapshots)
+
+### Implementation
+
+A Python script processes dbt artifacts and generates:
+
+- `metrics_latest.json` — aggregated run metrics
+- `metrics_latest.csv` — row-level execution metrics
+
+Location:
+```text
+orchestration/metrics_from_run_results.py
+orchestration/logs/
