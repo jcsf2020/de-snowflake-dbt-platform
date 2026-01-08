@@ -114,7 +114,7 @@ Execution flow:
 
 ## Project Structure
 
-```text
+~~~text
 models/
   staging/        Source cleaning and standardization
   intermediate/   Business logic transformations
@@ -125,8 +125,7 @@ snapshots/        Snapshot definitions
 macros/           Reusable SQL macros
 orchestration/    Prefect flow definitions
 
-
-
+~~~
 
 ## Observability & Run Metrics
 
@@ -149,6 +148,8 @@ A Python script processes dbt artifacts and generates:
 - `metrics_latest.csv` — row-level execution metrics
 
 Location:
-```text
+~~~text
 orchestration/metrics_from_run_results.py
 orchestration/logs/
+~~~
+```
