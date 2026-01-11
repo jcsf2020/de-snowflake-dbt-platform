@@ -96,6 +96,17 @@ After each execution, dbt artifacts are parsed to extract operational metrics.
 - Resource-type breakdown (model, test, seed, snapshot)
 - Top slowest nodes
 
+## CI & Code Quality
+
+This project uses Continuous Integration (CI) via GitHub Actions to ensure code quality and safe integration.
+
+On every push or pull request to the main branch, the CI pipeline:
+- Checks out the repository
+- Sets up a clean Python environment
+- Performs syntax validation on orchestration and observability code
+
+A green CI run indicates that changes are safe to merge and do not break the project structure. This reflects standard practices in remote-first data teams.
+
 ---
 
 ## Metrics Output
