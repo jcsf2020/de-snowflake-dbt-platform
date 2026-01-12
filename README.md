@@ -1,3 +1,5 @@
+![CI](https://github.com/jcsf2020/de-snowflake-dbt-platform/actions/workflows/ci.yml/badge.svg)
+
 # Snowflake + dbt Analytics Platform
 
 End-to-end Analytics Engineering project using **dbt** and **Snowflake**, showcasing modern data engineering best practices: layered modeling, data quality enforcement, historical tracking (SCD Type 2), documentation, and observability.
@@ -117,6 +119,14 @@ Generated after each run:
 - `orchestration/logs/metrics_latest.csv`
 
 These files allow inspection of pipeline performance and bottlenecks.
+
+## Production & Deployment Notes
+
+In a production environment, this project would run on a scheduled basis using an orchestrator. The pipeline execution consists of running `dbt build` on Snowflake, followed by metrics extraction for observability.
+
+Continuous Integration (CI) validates every code change before deployment, ensuring that transformations and orchestration logic are safe to merge. Production credentials such as warehouse access are managed via environment variables or secret managers and are never stored in the repository.
+
+Separate environments (development and production) allow safe iteration while maintaining reliability and cost control in production workloads.
 
 ---
 
