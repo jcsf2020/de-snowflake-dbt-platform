@@ -1,15 +1,6 @@
 version: 2
 
 models:
-  - name: stg_my_first_model
-    description: "Staging model for first dataset"
-    columns:
-      - name: id
-        description: "Primary key"
-        data_tests:
-          - unique
-          - not_null
-
   - name: stg_customers
     description: "Staging view built from the customers seed"
     columns:
